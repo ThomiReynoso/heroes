@@ -1,15 +1,15 @@
-<p>heroes-list works!</p>
+<h2 class="title">Lista de héroes</h2>
 
-<ng-container *ngIf="(heroesListObs$ | async) as heroesList else loading">
-    <ul>
-        <li *ngFor="let hero of heroesList">
-            {{hero.name}}
-            <button [routerLink]="['/edit-new', hero.id]" mat-button color="primary">Editar</button>
-        </li>
-        
-    </ul>
-</ng-container>
-
+<div style="margin: 2rem;">
+    <ng-container *ngIf="(heroesListObs$ | async) as heroesList else loading">
+        <div class="list">
+        <a mat-raised-button *ngFor="let hero of heroesList"
+            [routerLink]="['/edit-new', hero.id]">
+                {{hero.name}}
+        </a >
+    </div>
+    </ng-container>
+</div>
 <ng-template #loading>
   <p>Loading...</p>
 </ng-template>  

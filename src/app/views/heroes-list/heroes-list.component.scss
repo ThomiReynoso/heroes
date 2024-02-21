@@ -1,0 +1,14 @@
+.list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-content: flex-start;
+    align-items: flex-start;
+}
+
+.title { 
+    margin: 2rem;
+    display: flex;
+    justify-content: center;
+}
