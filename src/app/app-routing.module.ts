@@ -6,7 +6,7 @@ import { EditNewHeroeComponent } from './views/edit-new-heroe/edit-new-heroe.com
 const routes: Routes = [
   { path: '', redirectTo: '/heroes', pathMatch: 'full' },
   { path: 'heroes', component: HeroesListComponent },	
-  { path: 'edit-new', component: EditNewHeroeComponent },	
+  { path: 'edit-new/:id', component: EditNewHeroeComponent },	
 ];
 
 @NgModule({

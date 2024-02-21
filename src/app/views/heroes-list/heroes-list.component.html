@@ -4,7 +4,9 @@
     <ul>
         <li *ngFor="let hero of heroesList">
             {{hero.name}}
+            <button [routerLink]="['/edit-new', hero.id]" mat-button color="primary">Editar</button>
         </li>
+        
     </ul>
 </ng-container>
 

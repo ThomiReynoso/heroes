@@ -21,4 +21,5 @@ export class HeroesListComponent implements OnInit {
   getHeroes() {
     this.heroesListObs$ = this.heroService.getHeroes();
   }
+
 }
