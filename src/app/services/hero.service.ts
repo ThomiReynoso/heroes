@@ -22,7 +22,7 @@ export class HeroService {
     );
   }
 
-  private handleError<T>(operation = 'operation', result?: T) {
+  handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
       console.log(`${operation} failed: ${error.message}`);

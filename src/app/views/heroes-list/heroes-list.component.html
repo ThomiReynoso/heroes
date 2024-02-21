@@ -1,1 +1,13 @@
 <p>heroes-list works!</p>
+
+<ng-container *ngIf="(heroesListObs$ | async) as heroesList else loading">
+    <ul>
+        <li *ngFor="let hero of heroesList">
+            {{hero.name}}
+        </li>
+    </ul>
+</ng-container>
+
+<ng-template #loading>
+  <p>Loading...</p>
+</ng-template>  
