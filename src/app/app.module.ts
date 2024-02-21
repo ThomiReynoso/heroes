@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { HeroesListComponent } from './views/heroes-list/heroes-list.component';
 import { EditNewHeroeComponent } from './views/edit-new-heroe/edit-new-heroe.component';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
