@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeroesListComponent } from './views/heroes-list/heroes-list.component';
 import { EditNewHeroeComponent } from './views/edit-new-heroe/edit-new-heroe.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { EditNewHeroeComponent } from './views/edit-new-heroe/edit-new-heroe.com
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
