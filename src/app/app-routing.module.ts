@@ -7,6 +7,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/heroes', pathMatch: 'full' },
   { path: 'heroes', component: HeroesListComponent },	
   { path: 'edit-new/:id', component: EditNewHeroeComponent },	
+  { path: 'new', component: EditNewHeroeComponent },	
 ];
 
 @NgModule({

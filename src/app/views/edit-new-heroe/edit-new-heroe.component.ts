@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Hero } from 'src/app/models/hero';
@@ -17,8 +17,7 @@ export class EditNewHeroeComponent implements OnInit, OnDestroy {
   heroeId?: number;
   heroeForm: FormGroup = new FormGroup({
     id: new FormControl(null),
-    name: new FormControl(''),
-    age: new FormControl(null)
+    name: new FormControl('', [Validators.required]),
   });
   
   constructor(
@@ -26,8 +25,6 @@ export class EditNewHeroeComponent implements OnInit, OnDestroy {
     private router: Router,
     private heroService: HeroService,
   ) { }
-
-
 
   ngOnInit(): void {
     this.routeSubs = this.route.params.subscribe(params => {
@@ -47,7 +44,11 @@ export class EditNewHeroeComponent implements OnInit, OnDestroy {
 
   saveHero() {
     const updatedHero = this.heroeForm.value;
-    this.heroService.updateHero(updatedHero).subscribe(()=> this.goBack())
+    if (this.isEditing) { 
+      this.heroService.updateHero(updatedHero).subscribe(()=> this.goBack());
+    } else { 
+      this.heroService.addHero(updatedHero).subscribe(()=> this.goBack());
+    }
   }
 
   goBack() {

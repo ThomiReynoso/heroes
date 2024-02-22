@@ -1,13 +1,15 @@
 <form [formGroup]="heroeForm" (ngSubmit)="saveHero()">
     <div>
-        <label for="id">Id:</label>
-        <input type="number" formControlName="id" readonly [disabled]="true">
+        <ng-container *ngIf="isEditing">
+            <label for="id">Id:</label>
+            <input type="number" formControlName="id" readonly [disabled]="true">    
+        </ng-container>
         <label for="nombre">Nombre:</label>
-        <input type="text" formControlName="name">
+        <input type="text" placeholder="Inserte un nombre" formControlName="name">
         <div *ngIf="heroeForm.get('name')?.invalid && (heroeForm.get('name')?.dirty || heroeForm.get('name')?.touched)">
             <div *ngIf="heroeForm.get('name')?.errors">El nombre es requerido.</div>
         </div>
     </div>
     <button mat-raised-button  (click)="goBack()">Volver</button>
-    <button mat-raised-button color="primary" type="submit">Guardar</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="!heroeForm.valid" >Guardar</button>
 </form>

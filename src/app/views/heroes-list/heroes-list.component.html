@@ -1,5 +1,7 @@
 <h2 class="title">Lista de héroes</h2>
 <app-searcher></app-searcher>
+<button mat-flat-button [routerLink]="['/new']" color="primary">Nuevo</button>
+
 <div style="margin: 2rem;">
     <ng-container *ngIf="(heroesListObs$ | async) as heroesList else loading">
 
