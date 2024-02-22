@@ -25,7 +25,19 @@ export class HeroService {
       }),
       catchError(this.handleError<Hero[]>('getHeroes', []))
     );
-  } 
+  }
+
+  getHeroById(id: number): Observable<Hero> {
+    debugger
+    const heroes = this.heroesSubject.getValue();
+    const hero = heroes.find(hero => hero.id === id);
+
+    // Here we can make an API call to get the hero by id with GET 
+    if (!hero) {
+      return of({} as Hero);
+    }
+    return of(hero);
+  }
 
   handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

@@ -1,8 +1,8 @@
 
 <div>
     <input type="text" (input)="onInputChange($event)" placeholder="Search by name">
-  </div>
-  
-  <div *ngFor="let hero of heroes$ | async">
-    <p style="cursor: pointer;" [routerLink]="['/edit-new', hero.id]">{{ hero.name }}</p>
-  </div>
+</div>
+
+<div *ngFor="let hero of heroes$ | async">
+    <p style="cursor: pointer;" [routerLink]="['/edit-new', hero.id]">{{ hero.name | titlecase }}</p>
+</div>
