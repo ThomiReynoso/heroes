@@ -25,8 +25,6 @@ export class EditNewHeroeComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private heroService: HeroService,
-    private location: Location
-
   ) { }
 
 
@@ -53,6 +51,6 @@ export class EditNewHeroeComponent implements OnInit, OnDestroy {
   }
 
   goBack() {
-    this.location.back();
+    this.router.navigate(['/heroes']);
   }
 }

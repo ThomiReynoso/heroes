@@ -8,6 +8,6 @@
             <div *ngIf="heroeForm.get('name')?.errors">El nombre es requerido.</div>
         </div>
     </div>
-    
-    <button type="submit">Guardar</button>
+    <button mat-raised-button  (click)="goBack()">Volver</button>
+    <button mat-raised-button color="primary" type="submit">Guardar</button>
 </form>
