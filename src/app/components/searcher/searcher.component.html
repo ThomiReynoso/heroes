@@ -1,0 +1,8 @@
+
+<div>
+    <input type="text" (input)="onInputChange($event)" placeholder="Filtrar por nombre">
+  </div>
+  
+  <div *ngFor="let heroe of heroes">
+    <p>{{ heroe.name }}</p>
+  </div>

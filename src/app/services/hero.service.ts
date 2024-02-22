@@ -25,15 +25,24 @@ export class HeroService {
       }),
       catchError(this.handleError<Hero[]>('getHeroes', []))
     );
-  }
+  } 
 
   handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
       console.log(`${operation} failed: ${error.message}`);
-
+  
       return of(result as T);
     };
+  }
+
+  filterHeroes(searchTerm: string): Observable<Hero[]> {
+    if (!searchTerm.trim()) {
+      return of([]);
+    }
+
+    const heroes = this.heroesSubject.getValue();
+    return of(heroes.filter(hero => hero.name.toLowerCase().includes(searchTerm.toLowerCase())));
   }
 
 
