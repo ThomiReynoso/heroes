@@ -8,15 +8,19 @@ import { HeroService } from 'src/app/services/hero.service';
   templateUrl: './heroes-list.component.html',
   styleUrls: ['./heroes-list.component.scss']
 })
-export class HeroesListComponent {
+export class HeroesListComponent implements OnInit {
 
-  constructor(private heroService: HeroService) {
+  constructor(private heroService: HeroService){
   }
 
-  public heroesListObs$?: Observable<Hero[]> = this.heroService.getHeroes();
+  public heroesListObs$?: Observable<Hero[]> = this.heroService.heroes$;
 
-  remove(id: number) {
-    console.log("remove", id);
+  ngOnInit(): void {
+    this.heroService.getHeroes().subscribe();
+  }
+
+  remove(id: number): void {
+    this.heroService.deleteHero(id).subscribe();
   }
 
 }

@@ -11,7 +11,7 @@ export class HeroService {
   // private heroesUrl = `https://api.opendota.com/api/heroes`; // move to env file
   private heroesUrl = `api/mockedHeroes`; // move to env file
 
-  private heroesSubject = new BehaviorSubject<Hero[]>({}as Hero[]);
+  private heroesSubject = new BehaviorSubject<Hero[]>([] as Hero[]);
   public heroes$ = this.heroesSubject.asObservable();
 
   httpOptions = {
@@ -24,7 +24,7 @@ export class HeroService {
 
   getHeroes(): Observable<Hero[]> {
     return this.http.get<Hero[]>(this.heroesUrl).pipe(
-      tap((heroes) => {
+      tap((heroes: Hero[]) => {
         console.log('fetched heroes')
         this.heroesSubject.next(heroes);
       }),
@@ -36,7 +36,7 @@ export class HeroService {
     const url = `${this.heroesUrl}/${id}`;
     
     return this.http.get<Hero>(url).pipe(
-      tap((_) => console.log(`getHero id=${id}`)),
+      tap(() => console.log(`getHero id=${id}`)),
       catchError(this.handleError<Hero>(`getHero id=${id}`))
     );
   }
@@ -66,6 +66,19 @@ export class HeroService {
     );
   }
 
+  deleteHero(id: number): Observable<Hero> {
+
+    const allHeroes = this.heroesSubject.getValue();
+    const updatedHeroes = allHeroes.filter(hero => hero.id !== id);
+    this.heroesSubject.next(updatedHeroes);
+
+    const url = `${this.heroesUrl}/${id}`;
+
+    return this.http.delete<Hero>(url, this.httpOptions).pipe(
+      tap(() => console.log(`deleted hero id=${id}`)),
+      catchError(this.handleError<Hero>('deleteHero'))
+    );
+  }
 
 }
 
