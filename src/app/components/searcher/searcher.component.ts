@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Subject, debounceTime, distinctUntilChanged } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Observable, Subject, debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
 import { Hero } from 'src/app/models/hero';
 import { HeroService } from 'src/app/services/hero.service';
 
@@ -8,33 +8,23 @@ import { HeroService } from 'src/app/services/hero.service';
   templateUrl: './searcher.component.html',
   styleUrls: ['./searcher.component.scss']
 })
-export class SearcherComponent {
-  heroes: Hero[] = [];
-  filtroNombre: string = '';
-  private filtroNombreChanged: Subject<string> = new Subject<string>();
+export class SearcherComponent implements OnInit {
+  heroes$!: Observable<Hero[]>;
+  private heroFilterChanged: Subject<string> = new Subject<string>();
 
   constructor(private heroesService: HeroService) {
-    this.filtroNombreChanged.pipe(
-      debounceTime(200), 
-      distinctUntilChanged()
-    ).subscribe((filtro: string) => {
-      this.filtrarHeroes(filtro);
-    });
   }
 
-  filtrarHeroes(filtro: string) {
-    this.heroesService.filterHeroes(filtro).subscribe(
-      (heroes: Hero[]) => {
-        this.heroes = heroes;
-      },
-      (error: any) => {
-        console.error('Error al filtrar héroes:', error);
-      }
-    );
+  ngOnInit(): void {
+    this.heroes$ = this.heroFilterChanged.pipe(
+      debounceTime(200), 
+      distinctUntilChanged(),
+      switchMap(searchTerm => this.heroesService.filterHeroes(searchTerm))
+    ) 
   }
 
   onInputChange(event: Event) {
     const inputElement = event.target as HTMLInputElement;
-    this.filtroNombreChanged.next(inputElement.value);
+    this.heroFilterChanged.next(inputElement.value);
   }
 }
