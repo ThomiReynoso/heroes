@@ -22,4 +22,8 @@ export class HeroesListComponent implements OnInit {
     this.heroesListObs$ = this.heroService.getHeroes();
   }
 
+  remove(id: number) {
+    console.log("remove", id);
+  }
+
 }

@@ -2,14 +2,20 @@
 
 <div style="margin: 2rem;">
     <ng-container *ngIf="(heroesListObs$ | async) as heroesList else loading">
-        <div class="list">
-        <a mat-raised-button *ngFor="let hero of heroesList"
-            [routerLink]="['/edit-new', hero.id]">
-                {{hero.name}}
-        </a >
-    </div>
+
+    <mat-nav-list>
+        <mat-list-item  *ngFor="let hero of heroesList">
+           <a matListItemTitle [routerLink]="['/edit-new', hero.id]">{{ hero.name | titlecase }}</a>
+           <button mat-icon-button [routerLink]="['/edit-new', hero.id]" matListItemMeta>
+              <mat-icon>edit</mat-icon>
+           </button>
+           <button mat-icon-button (click)="remove(hero.id)" matListItemMeta>
+              <mat-icon>cancel</mat-icon>
+           </button>
+        </mat-list-item>
+    </mat-nav-list>
     </ng-container>
 </div>
-<ng-template #loading>
+<ng-template #loading>  
   <p>Loading...</p>
 </ng-template>  
