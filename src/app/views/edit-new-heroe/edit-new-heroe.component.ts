@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Hero } from 'src/app/models/hero';
 import { HeroService } from 'src/app/services/hero.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-edit-new-heroe',
@@ -24,6 +25,8 @@ export class EditNewHeroeComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private heroService: HeroService,
+    private location: Location
+
   ) { }
 
 
@@ -31,7 +34,7 @@ export class EditNewHeroeComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.routeSubs = this.route.params.subscribe(params => {
       this.heroeId = Number(params['id']);
-      debugger
+
       if (this.heroeId) {
         this.isEditing = true;
         this.heroService.getHeroById(this.heroeId).subscribe((heroe: Hero) => {
@@ -45,6 +48,11 @@ export class EditNewHeroeComponent implements OnInit, OnDestroy {
   }
 
   saveHero() {
+    const updatedHero = this.heroeForm.value;
+    this.heroService.updateHero(updatedHero).subscribe(()=> this.goBack())
+  }
 
+  goBack() {
+    this.location.back();
   }
 }

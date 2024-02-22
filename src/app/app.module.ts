@@ -12,6 +12,9 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatListModule} from '@angular/material/list';
 import { SearcherComponent } from './components/searcher/searcher.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { MockedDataService } from './services/mocked-data.service';
+
 
 @NgModule({
   declarations: [
@@ -28,7 +31,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatButtonModule,
     MatIconModule,
     MatListModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientInMemoryWebApiModule.forRoot(
+      MockedDataService, { dataEncapsulation: false }
+    )
   ],
   providers: [],
   bootstrap: [AppComponent]

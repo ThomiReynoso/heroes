@@ -1,13 +1,13 @@
 <form [formGroup]="heroeForm" (ngSubmit)="saveHero()">
     <div>
-      <label for="nombre">Nombre:</label>
-      <input type="text" formControlName="name">
-      <div *ngIf="heroeForm.get('name')?.invalid && (heroeForm.get('name')?.dirty || heroeForm.get('name')?.touched)">
-        <div *ngIf="heroeForm.get('name')?.errors">El nombre es requerido.</div>
-      </div>
+        <label for="id">Id:</label>
+        <input type="number" formControlName="id" readonly [disabled]="true">
+        <label for="nombre">Nombre:</label>
+        <input type="text" formControlName="name">
+        <div *ngIf="heroeForm.get('name')?.invalid && (heroeForm.get('name')?.dirty || heroeForm.get('name')?.touched)">
+            <div *ngIf="heroeForm.get('name')?.errors">El nombre es requerido.</div>
+        </div>
     </div>
-  
-    <!-- Add other form controls as needed -->
-  
+    
     <button type="submit">Guardar</button>
 </form>
