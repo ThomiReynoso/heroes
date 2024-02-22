@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { Hero } from '../models/hero';
 
@@ -10,6 +10,8 @@ import { Hero } from '../models/hero';
 export class HeroService {
   private heroesUrl = `https://api.opendota.com/api/heroes`; // move to env file
 
+  private heroesSubject = new BehaviorSubject<Hero[]>({}as Hero[]);
+  public heroes$ = this.heroesSubject.asObservable();
 
   constructor(
     private http: HttpClient,
@@ -17,7 +19,10 @@ export class HeroService {
 
   getHeroes(): Observable<Hero[]> {
     return this.http.get<Hero[]>(this.heroesUrl).pipe(
-      tap(() => console.log('fetched heroes')),
+      tap((heroes) => {
+        console.log('fetched heroes')
+        this.heroesSubject.next(heroes);
+      }),
       catchError(this.handleError<Hero[]>('getHeroes', []))
     );
   }
