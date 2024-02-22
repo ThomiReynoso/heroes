@@ -4,5 +4,5 @@
 </div>
 
 <div *ngFor="let hero of heroes$ | async">
-    <p style="cursor: pointer;" [routerLink]="['/edit-new', hero.id]">{{ hero.name | titlecase }}</p>
+    <p style="cursor: pointer;" [routerLink]="['/edit', hero.id]">{{ hero.name | titlecase }}</p>
 </div>
