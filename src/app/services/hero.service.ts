@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { Hero } from '../models/hero';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Injectable({ providedIn: 'root' })
@@ -20,6 +21,7 @@ export class HeroService {
 
   constructor(
     private http: HttpClient,
+    private snackBar: MatSnackBar,
   ) {}
 
   getHeroes(): Observable<Hero[]> {
@@ -61,7 +63,7 @@ export class HeroService {
 
   updateHero(hero: Hero): Observable<any> {
     return this.http.put(this.heroesUrl, hero, this.httpOptions).pipe(
-      tap(() => console.log(`updated hero id=${hero.id}`)),
+      tap(() => this.snackBar.open(`updated hero id=${hero.id}`)),
       catchError(this.handleError<any>('updateHero'))
     );
   }
@@ -73,7 +75,7 @@ export class HeroService {
 
     const url = `${this.heroesUrl}/${id}`;  
     return this.http.delete<Hero>(url, this.httpOptions).pipe(
-      tap(() => console.log(`deleted hero id=${id}`)),
+      tap(() => this.snackBar.open(`deleted hero id=${id}`)),
       catchError(this.handleError<Hero>('deleteHero'))
     );
   }
@@ -81,7 +83,7 @@ export class HeroService {
 
   addHero(hero: Hero): Observable<Hero> {
     return this.http.post<Hero>(this.heroesUrl, hero, this.httpOptions).pipe(
-      tap((newHero: Hero) => console.log(`added hero w/ id=${newHero.id}`)),
+      tap((newHero: Hero) => this.snackBar.open(`added hero w/ id=${newHero.id}`)),
       catchError(this.handleError<Hero>('addHero'))
     );
   }

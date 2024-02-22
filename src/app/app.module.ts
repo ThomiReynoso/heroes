@@ -15,6 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { MockedDataService } from './services/mocked-data.service';
 import { MatDialogModule } from '@angular/material/dialog';
+import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -34,11 +35,15 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatListModule,
     ReactiveFormsModule,
     MatDialogModule,
+    MatSnackBarModule,
     HttpClientInMemoryWebApiModule.forRoot(
       MockedDataService, { dataEncapsulation: false }
     )
   ],
-  providers: [],
+  providers: [
+    {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 1000}}
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
