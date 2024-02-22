@@ -14,6 +14,7 @@ import { SearcherComponent } from './components/searcher/searcher.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { MockedDataService } from './services/mocked-data.service';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { MockedDataService } from './services/mocked-data.service';
     MatIconModule,
     MatListModule,
     ReactiveFormsModule,
+    MatDialogModule,
     HttpClientInMemoryWebApiModule.forRoot(
       MockedDataService, { dataEncapsulation: false }
     )

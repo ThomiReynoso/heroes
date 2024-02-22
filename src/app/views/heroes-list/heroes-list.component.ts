@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
+import { ConfirmDialogComponent } from 'src/app/components/confirm-dialog/confirm-dialog.component';
+import { DialogData } from 'src/app/models/dialogData';
 import { Hero } from 'src/app/models/hero';
 import { HeroService } from 'src/app/services/hero.service';
 
@@ -10,8 +13,10 @@ import { HeroService } from 'src/app/services/hero.service';
 })
 export class HeroesListComponent implements OnInit {
 
-  constructor(private heroService: HeroService){
-  }
+  constructor(
+    private heroService: HeroService,
+    private dialog: MatDialog,
+  ) {}
 
   public heroesListObs$?: Observable<Hero[]> = this.heroService.heroes$;
 
@@ -20,7 +25,21 @@ export class HeroesListComponent implements OnInit {
   }
 
   remove(id: number): void {
-    this.heroService.deleteHero(id).subscribe();
+    const data: DialogData = {
+      title: 'Delete Hero',
+      message: 'Are you sure you want to delete this hero?',
+      confirmButtonText: 'Delete',
+      cancelButtonText: 'Cancel'
+    }
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, { 
+      data: data
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.heroService.deleteHero(id).subscribe();
+      }
+    });
   }
 
 }
