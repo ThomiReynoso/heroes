@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeroesListComponent } from './views/heroes-list/heroes-list.component';
 import { EditNewHeroeComponent } from './views/edit-new-heroe/edit-new-heroe.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
@@ -16,6 +16,8 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { MockedDataService } from './services/mocked-data.service';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule} from '@angular/material/snack-bar';
+import { LoaderComponent } from './components/loader/loader.component';
+import { LoaderInterceptor } from './interceptor/loader.interceptor';
 
 
 @NgModule({
@@ -23,7 +25,7 @@ import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule} from '@angular/materia
     AppComponent,
     HeroesListComponent,
     EditNewHeroeComponent,
-    SearcherComponent
+    SearcherComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,13 +38,14 @@ import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule} from '@angular/materia
     ReactiveFormsModule,
     MatDialogModule,
     MatSnackBarModule,
+    LoaderComponent,
     HttpClientInMemoryWebApiModule.forRoot(
       MockedDataService, { dataEncapsulation: false }
     )
   ],
   providers: [
-    {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 1000}}
-
+    {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 1000}},
+    {provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })

@@ -5,6 +5,7 @@ import { ConfirmDialogComponent } from 'src/app/components/confirm-dialog/confir
 import { DialogData } from 'src/app/models/dialogData';
 import { Hero } from 'src/app/models/hero';
 import { HeroService } from 'src/app/services/hero.service';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-heroes-list',
@@ -16,6 +17,7 @@ export class HeroesListComponent implements OnInit {
   constructor(
     private heroService: HeroService,
     private dialog: MatDialog,
+    public loadingService: LoadingService,
   ) {}
 
   public heroesListObs$?: Observable<Hero[]> = this.heroService.heroes$;

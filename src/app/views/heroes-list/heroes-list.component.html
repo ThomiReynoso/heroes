@@ -3,7 +3,7 @@
 <button mat-flat-button [routerLink]="['/new']" color="primary">Nuevo</button>
 
 <div style="margin: 2rem;">
-    <ng-container *ngIf="(heroesListObs$ | async) as heroesList else loading">
+    <ng-container *ngIf="(heroesListObs$ | async) as heroesList">
 
     <mat-nav-list>
         <mat-list-item  *ngFor="let hero of heroesList">
@@ -18,6 +18,6 @@
     </mat-nav-list>
     </ng-container>
 </div>
-<ng-template #loading>  
-  <p>Loading...</p>
-</ng-template>  
+<ng-container *ngIf="loadingService.getLoading()">  
+   <app-loader></app-loader>
+</ng-container>  
