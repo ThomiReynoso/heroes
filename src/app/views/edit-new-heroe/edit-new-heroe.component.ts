@@ -43,8 +43,7 @@ export class EditNewHeroeComponent implements OnInit, OnDestroy {
 
   saveHero() {
     const updatedHero = this.heroeForm.getRawValue();
-    if (this.isEditing) { 
-      debugger
+    if (this.isEditing) {
       this.heroService.updateHero(updatedHero).subscribe(()=> this.goBack());
     } else { 
       this.heroService.addHero(updatedHero).subscribe(()=> this.goBack());
