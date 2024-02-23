@@ -1,0 +1,23 @@
+.list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-content: flex-start;
+    align-items: flex-start;
+}
+
+.title { 
+    display: flex;
+    justify-content: center;
+}
+
+.searcher {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+    border: 1px solid black;
+    border-radius: 1rem;
+    background-color: #E9E9E9;
+}
