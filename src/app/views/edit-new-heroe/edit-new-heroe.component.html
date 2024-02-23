@@ -1,0 +1,24 @@
+<form class="form" [formGroup]="heroeForm" (ngSubmit)="saveHero()">
+    <h2> {{ isEditing ? "Editing hero" : "Creating a new hero" }} </h2>
+    <div>
+        <ng-container *ngIf="isEditing">
+        <mat-form-field  appearance="outline">
+            <mat-label for="id">Id</mat-label>
+            <input matInput type="number" formControlName="id" readonly>    
+        </mat-form-field>
+        </ng-container>
+    </div>
+    <div>
+        <mat-form-field style="width: 100%;" appearance="outline">
+            <mat-label for="nombre">Name</mat-label>
+            <input matInput type="text" placeholder="Insert a name" formControlName="name">
+            <mat-error *ngIf="heroeForm.get('name')?.hasError('required')" >
+                Name is required
+            </mat-error>
+        </mat-form-field>
+    </div>
+    <div class="btns">
+        <button mat-raised-button  (click)="goBack()">Back</button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="!heroeForm.valid" > {{ isEditing ? 'Save' : 'Create'}}</button>
+    </div>
+</form>

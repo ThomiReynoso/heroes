@@ -1,0 +1,23 @@
+<div style="margin: 5rem;">
+   <h1 class="title">Heroes List</h1>
+   <div class="searcher">
+      <app-searcher></app-searcher>
+      <button mat-flat-button [routerLink]="['/new']" color="primary">Create Hero</button>
+   </div>
+   <ng-container *ngIf="(heroesListObs$ | async) as heroesList">
+      <mat-nav-list>
+         <mat-list-item  *ngFor="let hero of heroesList">
+            <a matListItemTitle [routerLink]="['/edit', hero.id]">{{ hero.name | titlecase }}</a>
+            <button mat-icon-button [routerLink]="['/edit', hero.id]" matListItemMeta>
+               <mat-icon style="color: rgb(40, 94, 180);">edit</mat-icon>
+            </button>
+            <button mat-icon-button (click)="remove(hero)" matListItemMeta>
+               <mat-icon style="color: rgb(180, 46, 46)">cancel</mat-icon>
+            </button>
+         </mat-list-item>
+      </mat-nav-list>
+   </ng-container>
+</div>
+<ng-container *ngIf="loadingService.getLoading()">  
+   <app-loader></app-loader>
+</ng-container>  
