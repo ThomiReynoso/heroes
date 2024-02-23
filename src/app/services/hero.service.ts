@@ -5,12 +5,13 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { Hero } from '../models/hero';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({ providedIn: 'root' })
 export class HeroService {
 
-  private heroesUrl = `api/mockedHeroes`; // move to env file
+  private heroesUrl = environment.apiUrl;
 
   private heroesSubject = new BehaviorSubject<Hero[]>([] as Hero[]);
   public heroes$ = this.heroesSubject.asObservable();
