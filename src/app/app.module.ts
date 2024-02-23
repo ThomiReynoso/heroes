@@ -38,6 +38,8 @@ import {MatInputModule} from '@angular/material/input';
     MatListModule,
     ReactiveFormsModule,
     MatDialogModule,
+    MatInputModule,
+    MatFormFieldModule,
     MatSnackBarModule,
     LoaderComponent,
     SearcherComponent,
