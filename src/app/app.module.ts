@@ -18,6 +18,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule} from '@angular/material/snack-bar';
 import { LoaderComponent } from './components/loader/loader.component';
 import { LoaderInterceptor } from './interceptor/loader.interceptor';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 
 
 @NgModule({
@@ -25,7 +27,6 @@ import { LoaderInterceptor } from './interceptor/loader.interceptor';
     AppComponent,
     HeroesListComponent,
     EditNewHeroeComponent,
-    SearcherComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,6 +40,7 @@ import { LoaderInterceptor } from './interceptor/loader.interceptor';
     MatDialogModule,
     MatSnackBarModule,
     LoaderComponent,
+    SearcherComponent,
     HttpClientInMemoryWebApiModule.forRoot(
       MockedDataService, { dataEncapsulation: false }
     )

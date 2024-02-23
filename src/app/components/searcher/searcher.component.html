@@ -1,8 +1,15 @@
 
-<div>
-    <input type="text" (input)="onInputChange($event)" placeholder="Search by name">
-</div>
 
-<div *ngFor="let hero of heroes$ | async">
-    <p style="cursor: pointer;" [routerLink]="['/edit', hero.id]">{{ hero.name | titlecase }}</p>
-</div>
+<mat-form-field class="search-field" appearance="fill">
+    <mat-label>Search</mat-label>
+    <input matInput type="text" placeholder="Enter your search query" [matAutocomplete]="auto" (input)="onInputChange($event)">
+    <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="query" (click)="clearSearch()">
+      <mat-icon>close</mat-icon>
+    </button>
+</mat-form-field>
+
+<mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+    <mat-option *ngFor="let hero of heroes$ | async" [value]="hero">
+        <p [routerLink]="['/edit', hero.id]">{{ hero.name | titlecase }}</p>
+    </mat-option>
+</mat-autocomplete>
