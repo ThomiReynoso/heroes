@@ -26,7 +26,6 @@ import {MatInputModule} from '@angular/material/input';
   declarations: [
     AppComponent,
     HeroesListComponent,
-    EditNewHeroeComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,10 +35,8 @@ import {MatInputModule} from '@angular/material/input';
     MatButtonModule,
     MatIconModule,
     MatListModule,
-    ReactiveFormsModule,
     MatDialogModule,
     MatInputModule,
-    MatFormFieldModule,
     MatSnackBarModule,
     LoaderComponent,
     SearcherComponent,

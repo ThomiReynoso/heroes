@@ -6,8 +6,14 @@ import { EditNewHeroeComponent } from './views/edit-new-heroe/edit-new-heroe.com
 const routes: Routes = [
   { path: '', redirectTo: '/heroes', pathMatch: 'full' },
   { path: 'heroes', component: HeroesListComponent },	
-  { path: 'edit/:id', component: EditNewHeroeComponent },	
-  { path: 'new', component: EditNewHeroeComponent },	
+  { 
+    path: 'edit/:id',
+    loadChildren: () => import('./views/edit-new-heroe/edit-new-heroe.module').then(m => m.EditNewHeroeModule)
+  },	
+  { 
+    path: 'new',	
+    loadChildren: () => import('./views/edit-new-heroe/edit-new-heroe.module').then(m => m.EditNewHeroeModule)
+  },  
 ];
 
 @NgModule({
