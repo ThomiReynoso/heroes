@@ -19,7 +19,6 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 export class SearcherComponent implements OnInit {
   heroes$!: Observable<Hero[]>;
   private heroFilterChanged: Subject<string> = new Subject<string>();
-  query: string = '';
 
   constructor(private heroesService: HeroService) {
   }
@@ -35,11 +34,6 @@ export class SearcherComponent implements OnInit {
   onInputChange(event: Event) {
     const inputElement = event.target as HTMLInputElement;
     this.heroFilterChanged.next(inputElement.value);
-  }
-
-  clearSearch(): void {
-    this.query = '';
-    this.heroFilterChanged.next(this.query);
   }
 
   displayFn(hero: Hero): string {

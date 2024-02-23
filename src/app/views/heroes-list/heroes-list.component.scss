@@ -8,7 +8,12 @@
 }
 
 .title { 
-    margin: 2rem;
     display: flex;
     justify-content: center;
+}
+
+.searcher {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }

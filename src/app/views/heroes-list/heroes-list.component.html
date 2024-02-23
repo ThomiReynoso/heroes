@@ -1,8 +1,9 @@
 <div style="margin: 5rem;">
-   <h2 class="title">Heroes List</h2>
-   <app-searcher></app-searcher>
-   <button mat-flat-button [routerLink]="['/new']" color="primary">Create Hero</button>
-   
+   <h1 class="title">Heroes List</h1>
+   <div class="searcher">
+      <app-searcher></app-searcher>
+      <button mat-flat-button [routerLink]="['/new']" color="primary">Create Hero</button>
+   </div>
    <ng-container *ngIf="(heroesListObs$ | async) as heroesList">
       <mat-nav-list>
          <mat-list-item  *ngFor="let hero of heroesList">
