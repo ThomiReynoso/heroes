@@ -9,7 +9,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({ providedIn: 'root' })
 export class HeroService {
-  // private heroesUrl = `https://api.opendota.com/api/heroes`; // move to env file
+
   private heroesUrl = `api/mockedHeroes`; // move to env file
 
   private heroesSubject = new BehaviorSubject<Hero[]>([] as Hero[]);
