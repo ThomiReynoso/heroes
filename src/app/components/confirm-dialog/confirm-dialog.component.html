@@ -2,7 +2,7 @@
 <mat-dialog-content>
     {{ data.message }}
 </mat-dialog-content>
-<mat-dialog-actions>
+<mat-dialog-actions class="actions">
   <button mat-stroked-button color="primary" mat-dialog-close>{{ data.cancelButtonText }}</button>
   <button mat-raised-button color="primary" cdkFocusInitial [mat-dialog-close]="true">{{ data.confirmButtonText }}</button>
 </mat-dialog-actions>

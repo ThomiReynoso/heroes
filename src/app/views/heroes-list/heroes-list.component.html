@@ -9,10 +9,10 @@
          <mat-list-item  *ngFor="let hero of heroesList">
             <a matListItemTitle [routerLink]="['/edit', hero.id]">{{ hero.name | titlecase }}</a>
             <button mat-icon-button [routerLink]="['/edit', hero.id]" matListItemMeta>
-               <mat-icon>edit</mat-icon>
+               <mat-icon style="color: rgb(40, 94, 180);">edit</mat-icon>
             </button>
             <button mat-icon-button (click)="remove(hero)" matListItemMeta>
-               <mat-icon>cancel</mat-icon>
+               <mat-icon style="color: rgb(180, 46, 46)">cancel</mat-icon>
             </button>
          </mat-list-item>
       </mat-nav-list>

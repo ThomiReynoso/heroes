@@ -4,7 +4,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Hero } from 'src/app/models/hero';
 import { HeroService } from 'src/app/services/hero.service';
-import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-edit-new-heroe',
@@ -16,7 +15,7 @@ export class EditNewHeroeComponent implements OnInit, OnDestroy {
   isEditing: boolean = false;
   heroeId?: number;
   heroeForm: FormGroup = new FormGroup({
-    id: new FormControl(null),
+    id: new FormControl({value: null, disabled: true} ),
     name: new FormControl('', [Validators.required]),
   });
   
@@ -43,8 +42,9 @@ export class EditNewHeroeComponent implements OnInit, OnDestroy {
   }
 
   saveHero() {
-    const updatedHero = this.heroeForm.value;
+    const updatedHero = this.heroeForm.getRawValue();
     if (this.isEditing) { 
+      debugger
       this.heroService.updateHero(updatedHero).subscribe(()=> this.goBack());
     } else { 
       this.heroService.addHero(updatedHero).subscribe(()=> this.goBack());
