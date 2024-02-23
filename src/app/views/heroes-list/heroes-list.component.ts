@@ -24,20 +24,20 @@ export class HeroesListComponent implements OnInit {
     this.heroService.getHeroes().subscribe();
   }
 
-  remove(id: number): void {
+  remove(hero: Hero): void {
     const data: DialogData = {
       title: 'Delete Hero',
       message: 'Are you sure you want to delete this hero?',
       confirmButtonText: 'Delete',
       cancelButtonText: 'Cancel'
-    }
+    };
     const dialogRef = this.dialog.open(ConfirmDialogComponent, { 
       data: data
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.heroService.deleteHero(id).subscribe();
+        this.heroService.deleteHero(hero).subscribe();
       }
     });
   }

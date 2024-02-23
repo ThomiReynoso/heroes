@@ -63,19 +63,19 @@ export class HeroService {
 
   updateHero(hero: Hero): Observable<any> {
     return this.http.put(this.heroesUrl, hero, this.httpOptions).pipe(
-      tap(() => this.snackBar.open(`updated hero id=${hero.id}`)),
+      tap(() => this.snackBar.open(`Hero ${hero.name} was updated`)),
       catchError(this.handleError<any>('updateHero'))
     );
   }
 
-  deleteHero(id: number): Observable<Hero> {
+  deleteHero(heroParam: Hero): Observable<Hero> {
     const allHeroes = this.heroesSubject.getValue();
-    const updatedHeroes = allHeroes.filter(hero => hero.id !== id);
+    const updatedHeroes = allHeroes.filter(hero => hero.id !== heroParam.id);
     this.heroesSubject.next(updatedHeroes);
 
-    const url = `${this.heroesUrl}/${id}`;  
+    const url = `${this.heroesUrl}/${heroParam.id}`;  
     return this.http.delete<Hero>(url, this.httpOptions).pipe(
-      tap(() => this.snackBar.open(`deleted hero id=${id}`)),
+      tap(() => this.snackBar.open(`Hero ${heroParam.name} was deleted`)),
       catchError(this.handleError<Hero>('deleteHero'))
     );
   }
@@ -83,7 +83,7 @@ export class HeroService {
 
   addHero(hero: Hero): Observable<Hero> {
     return this.http.post<Hero>(this.heroesUrl, hero, this.httpOptions).pipe(
-      tap((newHero: Hero) => this.snackBar.open(`added hero w/ id=${newHero.id}`)),
+      tap((newHero: Hero) => this.snackBar.open(`Hero with name ${newHero.name} was created`)),
       catchError(this.handleError<Hero>('addHero'))
     );
   }
